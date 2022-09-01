@@ -1,0 +1,8 @@
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  padding-top: 3rem;
+  /* position:fixed; */
+}

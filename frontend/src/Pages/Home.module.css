@@ -1,0 +1,24 @@
+.homeContainer{
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: center;
+      /* gap: 10px 20px;  */
+      gap: 8%;
+      
+    
+}
+
+.title{
+      display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    /* align-items:center; */
+    align-items: flex-start;
+font-size: 2rem;
+
+
+
+
+
+}
