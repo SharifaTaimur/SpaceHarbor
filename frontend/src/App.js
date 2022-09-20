@@ -1,27 +1,48 @@
-
-import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Header from './component/Header';
 import Footer from './component/Footer';
+import { useEffect, useState } from 'react';
+import { SiteContext } from './context/siteContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
-  return (
-    // <>
-      <Router>
-      <div className="container">
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {/* <Route path="/" element={<PublicNote />} /> */}
+  const [siteData, setSiteData] = useState({
+    user: null,
+    isLoading: false,
+    isError: false,
+    isSuccess: false,
+    message: null,
+    notes: [],
+    data_loaded: false,
+  });
+  useEffect(() => {
+    const user = localStorage.getItem('user_infov1');
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-      <Footer />
-    </div>
-  </Router>
-  );}
+    if (user) {
+      setSiteData({ ...siteData, user: JSON.parse(user), data_loaded: true });
+    }
+  }, []);
+  return (
+    <>
+      <SiteContext.Provider value={{ siteData, setSiteData }}>
+        <Router>
+          <div className="container">
+            <Header />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Routes>
+            <Footer />
+          </div>
+        </Router>
+        <ToastContainer />
+      </SiteContext.Provider>
+    </>
+  );
+}
 
 export default App;

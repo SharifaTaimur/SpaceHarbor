@@ -1,19 +1,9 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa';
-import { SiteContext } from '../context/siteContext';
-import { useContext } from 'react';
-
-export default function Header() {
-  const navigate = useNavigate();
-
-  const { siteData, setSiteData } = useContext(SiteContext);
-
-  const onLogout = () => {
-    localStorage.removeItem('user_infov1');
-    setSiteData({ ...siteData, user: null });
-    navigate('/');
-  };
+import LoginAdmin from './LoginAdmin'
+import LoginParticipant from './LoginParticipant';
+export default function RenderAdminPart() {
   return (
     <div>
       <header className={styles.header}>
@@ -22,9 +12,8 @@ export default function Header() {
         </div>
         <ul>
           <li>
-            
-            <button className="btn" onClick={onLogout}>
-              <FaSignOutAlt /> Logout
+            <button className="btn" onClick={LoginAdmin}>
+              <FaSignOutAlt /> Admin
             </button>
           </li>
 

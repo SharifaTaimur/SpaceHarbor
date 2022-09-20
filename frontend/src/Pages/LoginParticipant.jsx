@@ -8,6 +8,7 @@ import axios from 'axios';
 import { BASE_URL } from '../utils/constant';
 
 function Login() {
+    
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -61,6 +62,11 @@ function Login() {
     return <Spinner />;
   }
 
+// constructor(props) {
+//     super(props);
+//     this.handleLogin = this.handleLogin.bind(this);
+//   }
+//   handleLogin() {}
   return (
     <>
       <section className="heading">
