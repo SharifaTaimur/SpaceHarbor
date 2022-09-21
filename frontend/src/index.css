@@ -1,9 +1,9 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 
-
+ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
@@ -49,6 +49,9 @@ h3 {
   padding: 0 20px;
   text-align: center;
 }
+
+
+
 
 .heading {
   font-size: 2rem;
