@@ -27,7 +27,7 @@ function Login() {
     if (siteData.isSuccess || siteData.user) {
       navigate('/');
     }
-  });
+  }, [siteData, navigate]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
