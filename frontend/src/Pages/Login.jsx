@@ -9,11 +9,11 @@ import { BASE_URL } from '../utils/constant';
 
 function Login() {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    username: '',
+    sessionId: '',
   });
 
-  const { email, password } = formData;
+  const { username, sessionId } = formData;
 
   const navigate = useNavigate();
 
@@ -40,12 +40,12 @@ function Login() {
     e.preventDefault();
 
     const userData = {
-      email,
-      password,
+      username,
+      sessionId,
     };
 
     axios
-      .post(BASE_URL + '/api/users/login', userData)
+      .post(BASE_URL + '/api/player/join', userData)
       .then((res) => {
         if (res.data) {
           setSiteData({ ...siteData, user: res.data });
@@ -65,32 +65,32 @@ function Login() {
     <>
       <section className="heading">
         <h1>
-          <FaSignInAlt /> Login
+           Join Session
         </h1>
-        <p>Login and start play!!</p>
+        {/* <p>Login and start play!!</p> */}
       </section>
 
       <section className="form">
         <form onSubmit={onSubmit}>
           <div className="form-group">
             <input
-              type="email"
+              type="text"
               className="form-control"
-              id="email"
-              name="email"
-              value={email}
-              placeholder="Enter your email"
+              id="username"
+              name="username"
+              value={username}
+              placeholder="Enter your username"
               onChange={onChange}
             />
           </div>
           <div className="form-group">
             <input
-              type="password"
+              type="text"
               className="form-control"
-              id="password"
-              name="password"
-              value={password}
-              placeholder="Enter password"
+              id="sessionId"
+              name="sessionId"
+              value={sessionId}
+              placeholder="Enter session Id"
               onChange={onChange}
             />
           </div>

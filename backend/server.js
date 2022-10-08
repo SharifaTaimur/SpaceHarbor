@@ -15,7 +15,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/admin', require('./routes/ProjectRoutes'));
+app.use('/api/player', require('./routes/ProjectRoutes'));
 //serve frontend
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/build')));

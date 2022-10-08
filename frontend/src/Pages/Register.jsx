@@ -9,13 +9,11 @@ import { BASE_URL } from '../utils/constant';
 
 function Register() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    username: '',
     password: '',
-    password2: '',
   });
 
-  const { name, email, password, password2 } = formData;
+  const { username, password } = formData;
 
   const navigate = useNavigate();
   const { siteData, setSiteData } = useContext(SiteContext);
@@ -44,26 +42,25 @@ function Register() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (password !== password2) {
-      toast.error('Passwords do not match');
-    } else {
-      const userData = {
-        name,
-        email,
-        password,
-      };
+    // if (password !== password2) {
+    //   toast.error('Passwords do not match');
+    // } else {
+    //   const userData = {
 
-      axios
-        .post(BASE_URL + '/api/users', userData)
-        .then((res) => {
-          if (res.data) {
-            setSiteData({ ...siteData, user: res.data });
-          }
-        })
-        .catch((e) => {
-          setSiteData({ ...siteData, isError: true, message: e.message });
-        });
-    }
+    //     username,
+    //     password,
+    //   };
+
+    axios
+      .post(BASE_URL + '/api/admin')
+      .then((res) => {
+        if (res.data) {
+          setSiteData({ ...siteData, user: res.data });
+        }
+      })
+      .catch((e) => {
+        setSiteData({ ...siteData, isError: true, message: e.message });
+      });
   };
 
   if (siteData.isLoading) {
@@ -74,9 +71,9 @@ function Register() {
     <>
       <section className="heading">
         <h1>
-          <FaUser /> Register
+           Create Session
         </h1>
-        <p>Please create an account</p>
+       
       </section>
 
       <section className="form">
@@ -85,24 +82,14 @@ function Register() {
             <input
               type="text"
               className="form-control"
-              id="name"
-              name="name"
-              value={name}
-              placeholder="Enter your name"
+              id="username"
+              name="username"
+              value={username}
+              placeholder="Enter your username"
               onChange={onChange}
             />
           </div>
-          <div className="form-group">
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              name="email"
-              value={email}
-              placeholder="Enter your email"
-              onChange={onChange}
-            />
-          </div>
+
           <div className="form-group">
             <input
               type="password"
@@ -114,17 +101,7 @@ function Register() {
               onChange={onChange}
             />
           </div>
-          <div className="form-group">
-            <input
-              type="password"
-              className="form-control"
-              id="password2"
-              name="password2"
-              value={password2}
-              placeholder="Confirm password"
-              onChange={onChange}
-            />
-          </div>
+
           <div className="form-group">
             <button type="submit" className="btn btn-block">
               Submit

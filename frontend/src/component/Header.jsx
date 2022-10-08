@@ -22,7 +22,6 @@ export default function Header() {
         </div>
         <ul>
           <li>
-            
             <button className="btn" onClick={onLogout}>
               <FaSignOutAlt /> Logout
             </button>
@@ -31,12 +30,12 @@ export default function Header() {
           <>
             <li>
               <Link to="/login">
-                <FaSignInAlt /> Login
+                <FaSignInAlt /> Join Session
               </Link>
             </li>
             <li>
               <Link to="/register">
-                <FaUser /> Register
+                <FaUser /> Create Session
               </Link>
             </li>
           </>
