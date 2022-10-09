@@ -38,6 +38,12 @@ export default function Header() {
                 <FaUser /> Create Session
               </Link>
             </li>
+            
+            <li>
+              <Link to="/quiz">
+                <FaUser /> Quiz
+              </Link>
+            </li>
           </>
         </ul>
       </header>
