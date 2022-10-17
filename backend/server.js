@@ -14,15 +14,15 @@ const app = express();
 
 
 
-const session = express.session({
-  store: new Session({
-    url: 'localhost:5000',
-    maxAge:30000
-  }),
-  secret: 'superSecrete'
-});
+// const session = express.session({
+//   store: new Session({
+//     url: 'localhost:5000',
+//     maxAge:30000
+//   }),
+//   secret: 'superSecrete'
+// });
 
-app.use(session);
+// app.use(session);
 
 
 app.use(express.json());

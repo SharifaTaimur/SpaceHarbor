@@ -11,13 +11,13 @@ export default class AllQuizes extends React.Component{
         }
     }
 
-    // componentDidMount(){
-    //     axios.get('/api/quizes/allQuizes/' + localStorage.getItem('_ID')).then(res =>{
-    //         this.setState({
-    //             quizes: res.data
-    //         })
-    //     })
-    // }
+    componentDidMount(){
+        axios.get('/api/quizes/allQuizes/' + localStorage.getItem('_ID')).then(res =>{
+            this.setState({
+                quizes: res.data
+            })
+        })
+    }
     
     render(){
         return (

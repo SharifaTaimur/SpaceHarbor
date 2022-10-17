@@ -68,29 +68,29 @@ export default class CreateQuiz extends React.Component{
         })
     }
 
-    // saveQuiz = () =>{
-    //     let quiz = {
-    //         mustBeSignedIn: this.state.mustBeSignedIn,
-    //         nname: this.state.nname,
-    //         questions: this.state.questions,
-    //         category: this.state.categoryVal
-    //     }
-    //     axios.post('/api/quizes/create', {quiz,createdBy :localStorage.getItem('_ID')}).then(res => {
-    //         if(res.data.success){
-    //             this.setState({
-    //                 questions: [],
-    //                 answers:[],
-    //                 categoryVal: "Technology",
-    //                 showToast: true
-    //             });
-    //             setTimeout(() =>{
-    //                 this.setState({showToast: false});
-    //             },3000);
-    //         }
-    //     }).catch(er => {
-    //         console.log(er);
-    //     })
-    // }
+    saveQuiz = () =>{
+        let quiz = {
+            mustBeSignedIn: this.state.mustBeSignedIn,
+            nname: this.state.nname,
+            questions: this.state.questions,
+            category: this.state.categoryVal
+        }
+        axios.post('/api/quizes/create', {quiz,createdBy :localStorage.getItem('_ID')}).then(res => {
+            if(res.data.success){
+                this.setState({
+                    questions: [],
+                    answers:[],
+                    categoryVal: "Technology",
+                    showToast: true
+                });
+                setTimeout(() =>{
+                    this.setState({showToast: false});
+                },3000);
+            }
+        }).catch(er => {
+            console.log(er);
+        })
+    }
 
 
 
