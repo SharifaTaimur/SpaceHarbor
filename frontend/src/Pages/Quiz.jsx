@@ -111,10 +111,11 @@ export default class CreateQuiz extends React.Component{
                             <option key={idx} value={cat}>{cat}</option>
                         ))}
                     </select>
-                    <div className="checkbox">
+                    
+                    {/* <div className="checkbox">
                         <span>Must be logged in to take</span>
                         <input checked={this.state.mustBeSignedIn} onChange={this.selectPrivate} type="checkbox" placeholder="Must be logged in to take" />
-                    </div>
+                    </div> */}
 
                     {this.state.questions.map((ques, idx) => (
                         <div className="question" key={idx}>
