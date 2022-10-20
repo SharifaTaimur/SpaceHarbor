@@ -63,45 +63,45 @@ function Login() {
 
   return (
     <>
-      <section className="heading">
-        <h1>
-           Join Session
-        </h1>
-        {/* <p>Login and start play!!</p> */}
-      </section>
+      <div className="CreateSessionContainer">
+        <section className="heading">
+          <h1>Join Session</h1>
+          {/* <p>Login and start play!!</p> */}
+        </section>
 
-      <section className="form">
-        <form onSubmit={onSubmit}>
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control"
-              id="username"
-              name="username"
-              value={username}
-              placeholder="Enter your username"
-              onChange={onChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control"
-              id="sessionId"
-              name="sessionId"
-              value={sessionId}
-              placeholder="Enter session Id"
-              onChange={onChange}
-            />
-          </div>
+        <section className="form">
+          <form onSubmit={onSubmit}>
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                id="username"
+                name="username"
+                value={username}
+                placeholder="Enter your username"
+                onChange={onChange}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                id="sessionId"
+                name="sessionId"
+                value={sessionId}
+                placeholder="Enter session Id"
+                onChange={onChange}
+              />
+            </div>
 
-          <div className="form-group">
-            <button type="submit" className="btn btn-block">
-              Submit
-            </button>
-          </div>
-        </form>
-      </section>
+            <div className="form-group">
+              <button type="submit" className="btn btn-block">
+                Join Session
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
     </>
   );
 }

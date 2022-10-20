@@ -1,29 +1,36 @@
 import React from 'react';
-import img from '../images/T-DevOps3.svg';
+import img from '../images/title.svg';
 import star from '../images/Star4.svg';
-import star1 from '../images/Group1.svg';
-import star2 from '../images/Star6.svg';
+import gms from '../images/qm2.svg';
+// import star1 from '../images/Group1.svg';
+// import star2 from '../images/Star6.svg';
 import styles from './Home.module.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   return (
-    <div className={styles.homeContainer}>
-      <div className={styles.box}>
-        {/* <img src={star1} alt="star" className={styles.stars} /> */}
-
+    <div>
+      {/* <div className={styles.qmark}>
+        <img src={gms} alt="star" className={styles.stars} />
+      </div> */}
+      <div className={styles.homeContainer}>
+        {/* <img src={qmark} alt="star" className={styles.stars} /> */}
+        {/* <img src={qmark} alt="star" className={styles.stars} /> */}
         <img src={img} alt="title" className={styles.title} />
+        {/* <img src={star} alt="star" className={styles.stars} /> */}
+
+        <div>
+          <ul>
+            <li>
+              <Link to="/login">Join Session</Link>
+            </li>
+            <li>
+              <Link to="/register">Create Session</Link>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div>
-        <ul>
-          <li>
-            <Link to="/login">Join Session</Link>
-          </li>
-          <li>
-            <Link to="/register">Create Session</Link>
-          </li>
-        </ul>
-      </div>
+    
     </div>
   );
 }

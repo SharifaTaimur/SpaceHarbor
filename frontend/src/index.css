@@ -12,11 +12,18 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-body {
-  display: flex;
+.CreateSessionContainer{
+   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+}
+body {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
   font-family: 'Poppins', sans-serif;
   height: 100vh;
   animation-name: color;
@@ -66,7 +73,12 @@ h3 {
   font-weight: 600;
   margin-bottom: 10px;
 }
-
+.idColor{
+  color:rgb(56, 45, 45);
+}
+.star{
+  
+}
 .container {
   width: 100%;
   max-width: 960px;

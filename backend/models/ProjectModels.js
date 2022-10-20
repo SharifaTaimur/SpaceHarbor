@@ -13,20 +13,20 @@ const ProjectSchema = mongoose.Schema(
         required: [true, 'Please add a password'],
       },
     },
-    Player: {
-      name: {
-        type: String,
-        required: [true, 'Please add a name'],
+    Players: [
+      {
+        name: {
+          type: String,
+          required: [true, 'Please add a username'],
+        },
+        score: {
+          type: Number,
+        },
+        streak: {
+          type: Number,
+        },
       },
-      score: {
-        type: Number,
-        //   required: [true, 'Please add a password'],
-      },
-      streak: {
-        type: Number,
-        //   required: [true, 'Please add a password'],
-      },
-    },
+    ],
     // Q_and_A: {
     //   //fix array
     //   Question: {
@@ -46,7 +46,8 @@ const ProjectSchema = mongoose.Schema(
     //     required: [true, 'Please add an answer'],
     //   },
     // },
-
+    // Status:{ InCreation | InLobby | InProgress | InLeaderBoards
+    // },
   },
   {
     timestamps: true,

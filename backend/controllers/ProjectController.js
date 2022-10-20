@@ -1,7 +1,7 @@
 // const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
-const Models = require('../models/projectModels');
+const Session = require('../models/projectModels');
 
 //@desc      Create new session
 //@route     POST /api/admin
@@ -19,18 +19,18 @@ const CreateSession = asyncHandler(async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
-  //craete user
+  //create session
 
-  const admin = await Models.create({
-    username,
-    password: hashedPassword,
+  const session = await Session.create({
+    Admin: {
+      username,
+      password: hashedPassword,
+    },
   });
 
-  if (admin) {
+  if (session) {
     res.status(201).json({
-      _id: admin.id,
-      name: admin.name,
-      // token: generateToken(admin._id),
+      sessionId: session.id,
     });
   } else {
     res.status(400);
