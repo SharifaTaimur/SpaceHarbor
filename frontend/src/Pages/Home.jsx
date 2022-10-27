@@ -1,7 +1,7 @@
 import React from 'react';
-import img from '../images/title.svg';
+import img from '../images/T.svg';
 import star from '../images/Star4.svg';
-import gms from '../images/qm2.svg';
+import gms from '../images/_.svg';
 // import star1 from '../images/Group1.svg';
 // import star2 from '../images/Star6.svg';
 import styles from './Home.module.css';
@@ -10,9 +10,9 @@ import { Link } from 'react-router-dom';
 export default function Home() {
   return (
     <div>
-      {/* <div className={styles.qmark}>
+      <div className={styles.qmark}>
         <img src={gms} alt="star" className={styles.stars} />
-      </div> */}
+      </div>
       <div className={styles.homeContainer}>
         {/* <img src={qmark} alt="star" className={styles.stars} /> */}
         {/* <img src={qmark} alt="star" className={styles.stars} /> */}
@@ -30,7 +30,9 @@ export default function Home() {
           </ul>
         </div>
       </div>
-    
+      <div className={styles.qmark}>
+        {/* <img src={gms} alt="star" className={styles.stars} /> */}
+      </div>
     </div>
   );
 }

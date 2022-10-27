@@ -1,5 +1,7 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React from "react";
+import { useParams } from "react-router-dom";
+import useSWR from "swr";
+import Quiz from "./Quiz";
 
 /*
     Consider using a state management library
@@ -8,24 +10,43 @@ import { useParams } from 'react-router-dom';
     - GraphQL
 */
 
+// const GET_SESSION = gql`
+//   query getSession($sessionId: String!, $username: String!, $password: String!) {
+    
+//   }
+// `
+
 const Session = () => {
-  const username = localStorage.getItem('username');
-  const password = localStorage.getItem('password');
+  const username = localStorage.getItem("username");
+  const password = localStorage.getItem("password");
   const { sessionId } = useParams();
-  // const { data, loading, error } = useQuery('http://localhost:5000/api/session', {
-  //     variables: {
-  //         username: username,
-  //         password: password
-  //     }
+
+  const { data, loading, error } = {
+    loading: false,
+    error: null,
+    data: {
+      status: "IN_CREATION"
+    }
+  };
+
+  // const { data, loading, error } = useSWR("http://localhost:5000/api/session", {
+  //   variables: {
+  //     username: username,
+  //     password: password,
+  //   },
   // });
 
-  // if (loading) {
-  //     return <p>loading...</p>
-  // }
+  if (loading) {
+    return <p>loading...</p>;
+  }
 
-  // if (error) {
-  //     return <p>rejected access...</p>
-  // }
+  if (error) {
+    return <p>rejected access...</p>;
+  }
+
+  if (data.status === "IN_CREATION") {
+    return <Quiz />;
+  }
 
   // if (data.status === 'IN_LOBBY') {
   //     return (
@@ -42,35 +63,67 @@ const Session = () => {
   //     )
   // }
 
-  //     if (data.status === 'IN_CREATION') {
-  //         return (
-  //           <div>
-  //             <p>creating questions</p>
-  //             {data.questions.map((question) => {
-  //                 return (
-  //                     <div>
-  //                         <p>id: {question.id}</p>
-  //                         <p>question: {question.body}</p>
-  //                         {/* ... */}
-  //                     </div>
-  //                 )
-  //             })}
-  //             <div>
-  //                 <p>Create a new question</p>
-  //                 <input type="textarea" />
+  // if (data.status === 'IN_CREATION') {
+  //     return (
+  //       <div>
+  //         <p>creating questions</p>
+  //         {data.questions.map((question) => {
+  //             return (
+  //                 <div>
+  //                     <p>id: {question.id}</p>
+  //                     <p>question: {question.body}</p>
+  //                     {/* ... */}
+  //                 </div>
+  //             )
+  //         })}
+  //         <div>
+  //             <p>Create a new question</p>
+  //             <input type="textarea" />
 
-  //             </div>
-  //           </div>
-  //         );
-  //     }
+  //         </div>
+  //       </div>
+  //     );
+  // }
 
   return (
-    <div className="CreateSessionContainer">
-      <section className="heading">
-        Session with id <mark>{sessionId} </mark>
+    <>
+      <section className='heading'>
+        <h1>Create Quiz</h1>
+        <div>Session ID: {sessionId}</div>
       </section>
-      ;
-    </div>
+
+      <section className='form'>
+        <form>
+          <div className='form-group'>
+            <input
+              type='text'
+              className='form-control'
+              id='question'
+              name='question'
+              value={username}
+              placeholder='Enter a question'
+            />
+          </div>
+
+          <div className='form-group'>
+            <input
+              type='password'
+              className='form-control'
+              id='password'
+              name='password'
+              value={password}
+              placeholder='Enter password'
+            />
+          </div>
+
+          <div className='form-group'>
+            <button type='submit' className='btn btn-block'>
+              Create Quiz
+            </button>
+          </div>
+        </form>
+      </section>
+    </>
   );
 };
 

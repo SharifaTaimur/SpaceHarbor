@@ -14,43 +14,10 @@ connectDB();
 
 const app = express();
 
-
-
-// const session = express.session({
-//   store: new Session({
-//     url: 'localhost:5000',
-//     maxAge:30000
-//   }),
-//   secret: 'superSecrete'
-// });
-
-// app.use(session);
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-
 app.use('/api', sessionRoutes);
-
-
-app.use('/api/admin', require('./routes/ProjectRoutes'));
-app.use('/api/player', require('./routes/ProjectRoutes'));
-
-//serve frontend
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../frontend/build')));
-
-  app.get('*', (req, res) =>
-    res.sendFile(
-      path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')
-    )
-  );
-} else {
-  app.get('/', (req, res) => res.send('Please set to production'));
-}
-
->>>>>>> b1a1d60fa5663bc7c2fbe373bf608b84d87406fa
 app.use(errorHandler);
 
 app.listen(port, () => console.log(`server started on post ${port}`));

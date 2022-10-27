@@ -3,12 +3,13 @@ import Home from './Pages/Home';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Session from './Pages/Session';
-// import Header from './component/Header';
-// import Footer from './component/Footer';
+import Quiz from './Pages/Quiz';
 import { useEffect, useState } from 'react';
 import { SiteContext } from './context/siteContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+
 function App() {
   const [siteData, setSiteData] = useState({
     user: null,
@@ -36,6 +37,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/quiz" element={<Quiz/>} />
+
               <Route path="/session/:sessionId" element={<Session />} />
             </Routes>
             {/* <Footer /> */}
