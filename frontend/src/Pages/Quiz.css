@@ -1,3 +1,13 @@
+.heading {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 7px;
+    margin-top: 90px;
+    padding: 0 20px;
+    color: white;
+  }
+
+
 .quiz-wrapper {
     display: flex;
     align-items: flex-start;
@@ -35,10 +45,33 @@
  }
  
  .quiz-wrapper .input {
-    width: 300px !important;
-    margin: 10px 0;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-family: inherit;
  }
- .quiz-wrapper .add-question, .add-answer {
+ .quiz-wrapper .add-question{
+    
+    margin-bottom: 60px;
+    margin-top:    10px;
+    box-shadow: 2px 2px 4px 2px rgb(0 0 0 / 20%);
+    padding: 10px 0;
+    text-align: center;
+    font-size: 1.5em !important;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 10px;
+    color: black;
+ }
+
+ .add-question:hover{
+    -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+ }
+
+ .add-answer {
     box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     padding: 10px 0;
@@ -53,19 +86,32 @@
     align-items:center;
  }
  
- .quiz-wrapper .btn-wrapper .btn {
+ .quiz-wrapper .btn-wrapper .btn:nth-child(2) {
     color: white;
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
     border-radius: 10px !important;
+    margin-left: 130px;
+    background-color: rgb(12, 92, 32);
+    width: 90px;
+
  }
  .quiz-wrapper .btn-wrapper .btn:first-child {
     background-color: red;
+    color: white;
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
+    margin-left:0;
+    border-radius: 10px !important;
+    width: 90px;
+
+
  }
  .quiz-wrapper .question {
     display: flex;
     position: relative;
     background-color: #eff0f1;
+    border-radius: 10px;
     padding: 12px;
-    width: 90%;
+    width: 100%;
     box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
     margin: 10px 0;
     border-left: 5px solid #00aaf1;
@@ -81,10 +127,17 @@
     border-radius: 10px !important;
     color: white;
     padding: 8px;
-    top: 5px;
+    top: 3.2px;
  }
  
  .quiz-wrapper .save-quiz {
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 1.5em !important;
+    cursor: pointer;
+    background-color: white;
     border-radius: 10px;
-    color: white;
+    color: black;
  }

@@ -3,19 +3,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  /* justify-content: center; */
+  /* height: 100vh; */
+  justify-content: center;
   color: #ffffff;
 }
-.CreateSessionContainer{
-   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 
-  /* height: 100vh; */
-}
 .qmark {
-  /* padding-top: 3rem; */
+  padding-top: 3rem;
   text-align: right;
 }
