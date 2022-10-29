@@ -3,6 +3,7 @@ import Home from './Pages/Home';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Session from './Pages/Session';
+import QuestionPage from './Pages/QuestionPage';
 // import Header from './component/Header';
 // import Footer from './component/Footer';
 import { useEffect, useState } from 'react';
@@ -31,12 +32,14 @@ function App() {
       <SiteContext.Provider value={{ siteData, setSiteData }}>
         <Router>
           <div className="container">
+            <QuestionPage countdownTimemstampMs={1643673600000} />
             {/* <Header /> */}
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/session/:sessionId" element={<Session />} />
+              <Route path="/quize" element={<QuestionPage />} />
             </Routes>
             {/* <Footer /> */}
           </div>

@@ -27,12 +27,20 @@ const ProjectSchema = mongoose.Schema(
         },
       },
     ],
+    // GameProgress {
+    //   currentQuestion: Number,
+    //   startedAt: Date,
+    // }
     // Q_and_A: {
     //   //fix array
     //   Question: {
     //     type: String,
     //     required: [true, 'Please add a question'],
     //   },
+    //  StartedAt: {
+    //     timerDuration: 1,
+    //   type: Date
+    // },
     //   Answer: {
     //     type: String,
     //     required: [true, 'Please add an answer'],
