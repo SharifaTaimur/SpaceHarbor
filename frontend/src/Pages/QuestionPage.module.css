@@ -1,0 +1,47 @@
+.ountDownTimer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.mainC {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background: rgb(255, 255, 255); */
+  /* width: 100vh; */
+  height: 100vh;
+}
+
+.btn {
+  margin: 1rem;
+  padding: 10px 20px;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 5px;
+  background: transparent;
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  appearance: button;
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+}
+
+.btn:hover {
+  background-color: rgb(255, 122, 122);
+  /* color: black; */
+}
+.pic {
+  text-align: left;
+}
+.ch {
+  width: 10rem;
+  /* height: auto; */
+  text-align: left;
+}

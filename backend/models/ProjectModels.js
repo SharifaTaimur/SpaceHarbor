@@ -59,7 +59,7 @@ const ProjectSchema = mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 module.exports = mongoose.model('Schema', ProjectSchema);

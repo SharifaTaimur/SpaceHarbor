@@ -29,14 +29,14 @@ function Login() {
     }
   }, [siteData, navigate]);
 
-  const onChange = (e) => {
-    setFormData((prevState) => ({
+  const onChange = e => {
+    setFormData(prevState => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = e => {
     e.preventDefault();
 
     const userData = {
@@ -46,13 +46,13 @@ function Login() {
 
     axios
       .post(BASE_URL + '/api/player/join', userData)
-      .then((res) => {
+      .then(res => {
         if (res.data) {
           setSiteData({ ...siteData, user: res.data });
           localStorage.setItem('user_infov1', JSON.stringify(res.data));
         }
       })
-      .catch((e) => {
+      .catch(e => {
         setSiteData({ ...siteData, isError: true, message: e.message });
       });
   };

@@ -31,14 +31,14 @@ function Register() {
   //   }
   // }, [siteData]);
 
-  const onChange = (e) => {
-    setFormData((prevState) => ({
+  const onChange = e => {
+    setFormData(prevState => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = async e => {
     e.preventDefault();
     // const {sessionID} = await fetch('backend.../create-session)
     //method:'POST',t

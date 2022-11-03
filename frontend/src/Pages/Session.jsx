@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Quiz from './Quiz';
+import Quiz from './CreateQuiz';
 
 /*
     Consider using a state management library

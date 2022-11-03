@@ -4,14 +4,15 @@ import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Session from './Pages/Session';
 import QuestionPage from './Pages/QuestionPage';
+import StartGame from './Pages/StartGame';
+import WaitingPage from './Pages/WaitingPage';
 // import Header from './component/Header';
 // import Footer from './component/Footer';
-import Quiz from './Pages/Quiz';
+import Quiz from './Pages/CreateQuiz';
 import { useEffect, useState } from 'react';
 import { SiteContext } from './context/siteContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 
 function App() {
   const [siteData, setSiteData] = useState({
@@ -23,28 +24,30 @@ function App() {
     notes: [],
     data_loaded: false,
   });
+
   useEffect(() => {
     const user = localStorage.getItem('user_infov1');
 
     if (user) {
-      setSiteData({ ...siteData, user: JSON.parse(user), data_loaded: true });
+      setSiteData(x => ({ ...x, user: JSON.parse(user), data_loaded: true }));
     }
   }, []);
+
   return (
     <>
       <SiteContext.Provider value={{ siteData, setSiteData }}>
         <Router>
           <div className="container">
-            <QuestionPage countdownTimemstampMs={1643673600000} />
             {/* <Header /> */}
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/quiz" element={<Quiz/>} />
+              <Route path="/createquiz" element={<Quiz />} />
 
               <Route path="/session/:sessionId" element={<Session />} />
-              <Route path="/quize" element={<QuestionPage />} />
+              <Route path="/inprogress" element={<QuestionPage />} />
+              <Route path="/game" element={<StartGame />} />
             </Routes>
             {/* <Footer /> */}
           </div>
