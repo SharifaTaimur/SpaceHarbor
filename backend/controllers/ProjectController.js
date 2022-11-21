@@ -1,7 +1,7 @@
 // const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
-const Session = require('../models/projectModels');
+const Session = require('../models/ProjectModels');
 
 //@desc      Create new session
 //@route     POST /api/admin
@@ -21,21 +21,21 @@ const CreateSession = asyncHandler(async (req, res) => {
 
   //create session
 
-  const session = await Session.create({
-    Admin: {
-      username,
-      password: hashedPassword,
-    },
-  });
+  // const session = await Session.create({
+  //   Admin: {
+  //     username,
+  //     password: hashedPassword,
+  //   },
+  // });
 
-  if (session) {
-    res.status(201).json({
-      sessionId: session.id,
-    });
-  } else {
-    res.status(400);
-    throw new Error('Invalid user data');
-  }
+  // if (session) {
+  //   res.status(201).json({
+  //     sessionId: session.id,
+  //   });
+  // } else {
+  //   res.status(400);
+  //   throw new Error("Invalid user data");
+  // }
 });
 
 //@desc      login session

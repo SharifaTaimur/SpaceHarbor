@@ -1,65 +1,48 @@
 const mongoose = require('mongoose');
 
-const ProjectSchema = mongoose.Schema(
-  {
-    ID: String,
-    Admin: {
-      username: {
+const userSchema = mongoose.Schema({
+  username: {
+    type: String,
+  },
+  password: {
+    type: String,
+  },
+  players: [
+    {
+      UserName: {
         type: String,
-        required: [true, 'Please add a username'],
       },
-      password: {
+      Score: {
         type: String,
-        required: [true, 'Please add a password'],
+      },
+      Streak: {
+        type: String,
       },
     },
-    Players: [
-      {
-        name: {
-          type: String,
-          required: [true, 'Please add a username'],
-        },
-        score: {
-          type: Number,
-        },
-        streak: {
-          type: Number,
-        },
+  ],
+  q_and_a: [
+    {
+      question: {
+        type: String,
       },
-    ],
-    // GameProgress {
-    //   currentQuestion: Number,
-    //   startedAt: Date,
-    // }
-    // Q_and_A: {
-    //   //fix array
-    //   Question: {
-    //     type: String,
-    //     required: [true, 'Please add a question'],
-    //   },
-    //  StartedAt: {
-    //     timerDuration: 1,
-    //   type: Date
-    // },
-    //   Answer: {
-    //     type: String,
-    //     required: [true, 'Please add an answer'],
-    //   },
-    //   OtherOptions: {
-    //     type: String[3],
-    //     required: [true, 'Please add an answer'],
-    //   },
-    //   SecondsToAnswer: {
-    //     type: Number,
-    //     required: [true, 'Please add an answer'],
-    //   },
-    // },
-    // Status:{ InCreation | InLobby | InProgress | InLeaderBoards
-    // },
+      answer: {
+        type: String,
+      },
+      otherOptions: {
+        type: [],
+      },
+      secondsToAnswer: {
+        type: String,
+      },
+    },
+  ],
+  status: {
+    type: String,
   },
-  {
-    timestamps: true,
+  currentQuestion: {
+    type: String,
   },
-);
+});
 
-module.exports = mongoose.model('Schema', ProjectSchema);
+const user = mongoose.model('User', userSchema);
+module.exports = user;
