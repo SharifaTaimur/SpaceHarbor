@@ -28,7 +28,9 @@ const Register = () => {
     };
 
     try {
-      await axios.post(BASE_URL + '/admin', userData);
+      await axios.post(BASE_URL + '/add', userData);
+      console.log('yooooooooooo');
+      // navigate('http://localhost:3000/createquiz');
     } catch (error) {
       if (error.response) {
         console.log(error.response.data);
@@ -50,7 +52,6 @@ const Register = () => {
 
         <section className="form">
           <form>
-            {/* <form onSubmit={onSubmit}> */}
             <div className="form-group">
               <input
                 type="text"

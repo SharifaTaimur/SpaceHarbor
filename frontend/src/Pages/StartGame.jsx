@@ -1,69 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Timer from '../component/Timer';
-// import useWindowSize from 'react-use/lib/useWindowSize';
-// import useWindowSize from './useWindowSize';
+import axios from 'axios';
+import { BASE_URL } from '../utils/constant';
 import Confetti from 'react-confetti';
 import gms from '../images/_.svg';
 
-const defaultTimer = 60;
-
-const questions = [
-  {
-    text: 'What does JSX stands for?',
-    options: [
-      { id: 0, text: 'JSON', isCorrect: false },
-      { id: 1, text: 'Angular JS', isCorrect: false },
-      { id: 2, text: 'JSON XML', isCorrect: false },
-      { id: 3, text: 'Javascript XML', isCorrect: true },
-    ],
-  },
-  {
-    text: 'How can we select an element with a specific ID in css?',
-    options: [
-      { id: 0, text: '#', isCorrect: true },
-      { id: 1, text: '.', isCorrect: false },
-      { id: 2, text: '^', isCorrect: false },
-      { id: 3, text: '*', isCorrect: false },
-    ],
-  },
-  {
-    text: 'How can we write comments in CSS',
-    options: [
-      { id: 0, text: '/* */', isCorrect: true },
-      { id: 1, text: '//', isCorrect: false },
-      { id: 2, text: '#', isCorrect: false },
-      { id: 3, text: 'All of the above', isCorrect: false },
-    ],
-  },
-  {
-    text: 'Which company developed ReactJS?',
-    options: [
-      { id: 0, text: 'Apple', isCorrect: false },
-      { id: 1, text: 'Facebook', isCorrect: true },
-      { id: 2, text: 'Google', isCorrect: false },
-      { id: 3, text: 'Twitter', isCorrect: false },
-    ],
-  },
-  {
-    text: 'In which language is React.js written?',
-    options: [
-      { id: 0, text: 'Python', isCorrect: false },
-      { id: 1, text: 'JavaScript', isCorrect: true },
-      { id: 2, text: 'Java', isCorrect: false },
-      { id: 3, text: 'PHP', isCorrect: false },
-    ],
-  },
-];
-
-export default function StartGame() {
-  //   const { width, height } = useWindowSize();
-
+const StartGame = () => {
+  const defaultTimer = 60;
   const [showResults, setShowResults] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(1);
   const [score, setScore] = useState(0);
   const [selected, setSelected] = useState(null);
-
   const [timer, setTimer] = useState(defaultTimer);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -75,8 +24,30 @@ export default function StartGame() {
     };
   }, [timer]);
 
+  const getQuestion = async () => {
+    const response = await axios.get(BASE_URL + '/getQuestions');
+    setData(response.data);
+  };
+
+  useEffect(() => {
+    getQuestion();
+  }, []);
+
+  // test -- start Timer
+  // const [counter, setCounter] = useState(59);
+
+  // useEffect(() => {
+  //   if (counter > 0) {
+  //     setTimeout(() => setCounter(counter - 1), 1000);
+  //   }
+  // }, [counter]);
+
+  // test -- end Timer
+
   const handleTimerEnd = useCallback(() => {
-    if (currentQuestion + 1 < questions.length) {
+    console.log('inside function');
+    if (currentQuestion < data?.q_and_a?.length) {
+      console.log('are you in?');
       setCurrentQuestion(currentQuestion + 1);
       setSelected(null);
     } else {
@@ -84,92 +55,102 @@ export default function StartGame() {
     }
   }, [currentQuestion]);
 
-  // Helper Functions
+  // original send
 
   /* A possible answer was clicked */
-  const optionClicked = (isCorrect, index) => {
-    if (selected !== null) {
-      return;
-    }
+  // const optionClicked = (isCorrect, index) => {
+  //   console.log('onClick', isCorrect, index);
 
-    // Increment the score
-    if (isCorrect) {
-      setScore(score + 1);
-    }
+  //   if (selected !== null) {
+  //     return;
+  //   }
 
-    setSelected(index);
+  //   // Increment the score
+  //   if (isCorrect) {
+  //     setScore(score + 1);
+  //   }
+
+  //   setSelected(index);
+  // };
+
+  const optionClicked = async option => {
+    data.q_and_a.map((val, indx) => {
+      Object.keys(val).forEach(key => {
+        if (indx === currentQuestion && key == 'answer') {
+          console.log('right', val[key], option);
+          val[key] === option && setScore(score + 1);
+          setCurrentQuestion(currentQuestion + 1);
+        }
+      });
+    });
+
+    //  here we will pass score for each user
+    // try {
+    //   await axios.post(BASE_URL + '/players', score);
+    // } catch {
+    //   console.log('update error scores');
+    // }
   };
 
-  /* Resets the game back to default */
-  const restartGame = () => {
-    setScore(0);
-    setCurrentQuestion(0);
-    setShowResults(false);
-    setSelected(null);
-  };
+  console.log('score', score, data?.q_and_a?.length - 1);
 
   return (
     <>
-      {/* <div className="questionMark">
-        <img src={gms} alt="star" />
-      </div> */}
-
       <div className="quecontainer">
-        {/* 1. Header  */}
-        {/* <h1>USA Quiz 🇺🇸</h1> */}
-
-        {/* 2. Current Score  */}
-        {/* <h2>Score: {score}</h2> */}
-
-        {/* 3. Show results or show the question game  */}
         {showResults ? (
-          /* 4. Final Results */
           <div className="final-results">
             <h1>Final Results</h1>
             <h2>
               <Confetti width={window.innerWidth} height={window.innerHeight} />
-              {score} out of {questions.length} correct - (
-              {(score / questions.length) * 100}%)
+              {score} out of {data?.q_and_a?.length - 1} correct - (
+              {(score / data?.q_and_a?.length - 1) * 100}%)
             </h2>
-            {/* <button onClick={() => restartGame()}>Restart game</button> */}
           </div>
         ) : (
-          /* 5. Question Card  */
-          <div className="question-card">
-            <Timer
-              initialTimer={10}
-              onTimerFinish={handleTimerEnd}
-              key={currentQuestion}
-            />
-            {/* Current Question  */}
-
-            <h3 className="question-text">
-              {' '}
-              {currentQuestion + 1}. {questions[currentQuestion].text}
-            </h3>
-
-            {/* List of possible answers  */}
-            <div className="opt">
-              {questions[currentQuestion].options.map((option, index) => {
+          <>
+            {data.q_and_a?.map((val, indx) => {
+              if (indx === currentQuestion) {
                 return (
-                  <div
-                    id="p"
-                    className={
-                      index === selected
-                        ? 'answersOptionsSelected'
-                        : 'answersOptions'
-                    }
-                    key={option.id}
-                    onClick={() => optionClicked(option.isCorrect, index)}
-                  >
-                    {option.text}
+                  <div className="question-card" id={indx}>
+                    <Timer
+                      initialTimer={10}
+                      onTimerFinish={handleTimerEnd}
+                      key={currentQuestion}
+                    />
+
+                    <h3 className="question-text">{val.question}</h3>
+                    <div className="opt">
+                      {val.otherOptions.map((option, index) => {
+                        return (
+                          <>
+                            <div
+                              id="p"
+                              className={
+                                index === selected
+                                  ? 'answersOptionsSelected'
+                                  : 'answersOptions'
+                              }
+                              key={option.id}
+                              onClick={e =>
+                                // optionClicked(option.isCorrect, index)
+                                optionClicked(option)
+                              }
+                            >
+                              {option}
+                            </div>
+                          </>
+                        );
+                      })}
+                    </div>
                   </div>
                 );
-              })}
-            </div>
-          </div>
+              }
+            })}
+          </>
         )}
       </div>
     </>
   );
-}
+};
+
+export default StartGame;

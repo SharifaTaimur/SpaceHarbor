@@ -5,7 +5,18 @@ const router = express.Router();
 const user = require('../models/ProjectModels');
 const mongoose = require('mongoose');
 
-router.route('/admin').post((req, res) => {
+// added --start
+// const {
+//   CreateSession,
+//   LoginSession,
+// } = require('../controllers/ProjectController');
+
+// router.post('/admin', CreateSession);
+// router.post('/player', LoginSession);
+
+// added --end
+
+router.route('/add').post((req, res) => {
   const username = req.body.username;
   const password = req.body.password;
   const newUser = new user({
@@ -23,7 +34,6 @@ router.route('/admin').post((req, res) => {
         question: '',
         answer: '',
         otherOptions: [],
-        secondsToAnswer: '1',
       },
     ],
     status: 'InCreation',
@@ -35,6 +45,7 @@ router.route('/admin').post((req, res) => {
 
 // get read & update data
 router.route('/save').post((req, res) => {
+  console.log('status update', req.body.status);
   user
     .findOne()
     .sort({ _id: -1 })
@@ -50,6 +61,7 @@ router.route('/save').post((req, res) => {
               otherOptions: req.body.answers,
               secondsToAnswer: '1',
             },
+            status: req.body.status,
           },
         },
         err => {
@@ -61,6 +73,99 @@ router.route('/save').post((req, res) => {
         },
       );
     });
+});
+
+router.route('/getQuestions').get((req, res) => {
+  user
+    .findOne()
+    .sort({ _id: -1 })
+    .limit(1)
+    .then(val => {
+      res.json(val);
+    })
+    .catch(err => console.log(err));
+});
+
+// add players and update score
+router.route('/players').post((req, res) => {
+  console.log(req.body.username);
+  user
+    .findOne()
+    .sort({ _id: -1 })
+    .limit(1)
+    .then(val => {
+      user.updateOne(
+        { _id: val._id },
+        {
+          $push: {
+            players: {
+              userName: req.body.username,
+              score: '6',
+              streak: req.body.sessionId,
+            },
+          },
+        },
+        err => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log('Players');
+          }
+        },
+      );
+    });
+});
+
+// update game status
+router.route('/updatestatus').post((req, res) => {
+  console.log('status update', req.body.status);
+  user
+    .findOne()
+    .sort({ _id: -1 })
+    .limit(1)
+    .then(val => {
+      user.updateOne(
+        { _id: val._id },
+        {
+          $set: {
+            status: req.body.status,
+          },
+        },
+        err => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log('Success update');
+          }
+        },
+      );
+    });
+});
+
+// delete question
+router.route('/deletequestion').post((req, res) => {
+  console.log('delete', req.body);
+  // user
+  //   .findOne()
+  //   .sort({ _id: -1 })
+  //   .limit(1)
+  //   .then(val => {
+  //     user.updateOne(
+  //       { _id: val._id },
+  //       {
+  //         $set: {
+  //           status: req.body.status,
+  //         },
+  //       },
+  //       err => {
+  //         if (err) {
+  //           console.log(err);
+  //         } else {
+  //           console.log('Success update');
+  //         }
+  //       },
+  //     );
+  //   });
 });
 
 module.exports = router;

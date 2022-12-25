@@ -1,13 +1,12 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CreateQuiz.css';
 import Dialog from './Dialog';
 import { BASE_URL } from '../utils/constant';
+// import { v4 as uuidv4 } from 'uuid';
 
 const Quiz = () => {
   const [values, setValues] = useState({
-    // questions: [],
-    // answers: [],
     addQuestion: false,
     questionName: '',
     correctAnswer: '',
@@ -15,6 +14,8 @@ const Quiz = () => {
   });
   const [questions, setQuestions] = useState([]);
   const [questionList, setQuestionList] = useState([]);
+  // const test = uuidv4();
+  // console.log('unique', test);
 
   const addAnswer = () => {
     if (questionList.length < 4) {
@@ -22,36 +23,16 @@ const Quiz = () => {
     }
   };
 
-  const saveQuiz = () => {
-    // let quiz = {
-    //   mustBeSignedIn: values.mustBeSignedIn,
-    //   name: values.name,
-    //   questions: values.questions,
-    //   category: values.categoryVal,
-    // };
-    // axios
-    //   .post('/api/quizes/create', {
-    //     quiz,
-    //     createdBy: localStorage.getItem('_ID'),
-    //     username: localStorage.getItem('username'),
-    //     password: localStorage.getItem('password'),
-    //   })
-    //   .then(res => {
-    //     if (res.data.success) {
-    //       this.setState({
-    //         questions: [],
-    //         answers: [],
-    //         categoryVal: 'Technology',
-    //         showToast: true,
-    //       });
-    //       setTimeout(() => {
-    //         this.setState({ showToast: false });
-    //       }, 3000);
-    //     }
-    //   })
-    //   .catch(er => {
-    //     console.log(er);
-    //   });
+  const saveQuiz = async () => {
+    const update = {
+      status: 'InLobby',
+    };
+
+    try {
+      await axios.post(BASE_URL + '/updatestatus', update);
+    } catch {
+      console.log('update error scores');
+    }
   };
 
   const saveQuestion = async () => {
@@ -100,6 +81,34 @@ const Quiz = () => {
 
     this.removeQuestion(question);
   };
+
+  // test -- start
+  const [testList, setTestList] = useState([]);
+  const getQuestion = async () => {
+    const response = await axios.get(BASE_URL + '/getQuestions');
+    setTestList(response.data);
+  };
+
+  useEffect(() => {
+    getQuestion();
+  }, []);
+
+  console.log(
+    'testList',
+    testList?.q_and_a?.map((val, indx) => {
+      Object.keys(val).forEach(key => {
+        console.log('right', key === '_id' && val[key]);
+      });
+    }),
+  );
+
+  // test -- end
+  // console.log(
+  //   'questions',
+  //   questions?.map((val, indx) => {
+  //     console.log('info', val, indx);
+  //   }),
+  // );
 
   return (
     <>
@@ -162,7 +171,7 @@ const Quiz = () => {
               </div>
 
               <span onClick={() => saveQuiz()} className="btn save-quiz">
-                Save Quiz
+                Submit Quiz
               </span>
 
               <Dialog model={values.addQuestion}>

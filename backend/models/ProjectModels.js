@@ -9,19 +9,22 @@ const userSchema = mongoose.Schema({
   },
   players: [
     {
-      UserName: {
+      userName: {
         type: String,
       },
-      Score: {
+      score: {
         type: String,
       },
-      Streak: {
+      streak: {
         type: String,
       },
     },
   ],
   q_and_a: [
     {
+      id: {
+        type: String,
+      },
       question: {
         type: String,
       },

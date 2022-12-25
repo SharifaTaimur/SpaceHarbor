@@ -14,6 +14,7 @@ export default function Header() {
     setSiteData({ ...siteData, user: null });
     navigate('/');
   };
+
   return (
     <div>
       <header className={styles.header}>

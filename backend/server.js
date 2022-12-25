@@ -5,7 +5,7 @@ const { errorHandler } = require('./middleware/errorMiddleware');
 const connectDB = require('./config/db');
 const port = process.env.PORT || 5000;
 const cors = require('cors');
-// const sessionRoutes = require('./routes/ProjectRoutes');
+const sessionRoutes = require('./routes/ProjectRoutes');
 const app = express();
 
 app.use(express.json());
@@ -14,9 +14,9 @@ app.use(cors());
 
 connectDB();
 
-// app.use("/api", sessionRoutes);
-// app.use("/api/admin", require("./routes/ProjectRoutes"));
-// app.use("/api/player", require("./routes/ProjectRoutes"));
+// app.use('/api', sessionRoutes);
+// app.use('/api/admin', require('./routes/ProjectRoutes'));
+// app.use('/api/player', require('./routes/ProjectRoutes'));
 
 // require routes
 app.use(require('./routes/ProjectRoutes'));

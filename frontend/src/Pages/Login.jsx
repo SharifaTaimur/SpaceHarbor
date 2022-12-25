@@ -7,16 +7,13 @@ import { SiteContext } from '../context/siteContext';
 import axios from 'axios';
 import { BASE_URL } from '../utils/constant';
 
-function Login() {
+const Login = () => {
   const [formData, setFormData] = useState({
     username: '',
     sessionId: '',
   });
-
   const { username, sessionId } = formData;
-
   const navigate = useNavigate();
-
   const { siteData, setSiteData } = useContext(SiteContext);
 
   useEffect(() => {
@@ -44,8 +41,10 @@ function Login() {
       sessionId,
     };
 
+    console.log('players', userData);
+
     axios
-      .post(BASE_URL + '/api/player/join', userData)
+      .post(BASE_URL + '/players', userData)
       .then(res => {
         if (res.data) {
           setSiteData({ ...siteData, user: res.data });
@@ -102,6 +101,6 @@ function Login() {
       </section>
     </>
   );
-}
+};
 
 export default Login;

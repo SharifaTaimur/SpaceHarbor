@@ -15,7 +15,8 @@
 body {
   font-family: 'Poppins', sans-serif;
   height: 100vh;
-  animation-name: color;
+  background-color: lightgray;
+  /* animation-name: color; */
   animation-duration: 10s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;

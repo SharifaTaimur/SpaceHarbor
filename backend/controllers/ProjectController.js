@@ -20,22 +20,21 @@ const CreateSession = asyncHandler(async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, salt);
 
   //create session
+  const session = await Session.create({
+    Admin: {
+      username,
+      password: hashedPassword,
+    },
+  });
 
-  // const session = await Session.create({
-  //   Admin: {
-  //     username,
-  //     password: hashedPassword,
-  //   },
-  // });
-
-  // if (session) {
-  //   res.status(201).json({
-  //     sessionId: session.id,
-  //   });
-  // } else {
-  //   res.status(400);
-  //   throw new Error("Invalid user data");
-  // }
+  if (session) {
+    res.status(201).json({
+      sessionId: session.id,
+    });
+  } else {
+    res.status(400);
+    throw new Error('Invalid user data');
+  }
 });
 
 //@desc      login session

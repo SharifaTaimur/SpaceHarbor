@@ -2,19 +2,6 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import Quiz from './CreateQuiz';
 
-/*
-    Consider using a state management library
-    - react-query
-    - useSWR
-    - GraphQL
-*/
-
-// const GET_SESSION = gql`
-//   query getSession($sessionId: String!, $username: String!, $password: String!) {
-
-//   }
-// `
-
 const Session = () => {
   const username = localStorage.getItem('username');
   const password = localStorage.getItem('password');
