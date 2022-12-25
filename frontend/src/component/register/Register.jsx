@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import { redirect, useNavigate } from 'react-router-dom';
-import star from '../images/Star4.svg';
+import star from '../../images/Star4.svg';
 import axios from 'axios';
-import { BASE_URL } from '../utils/constant';
+import { BASE_URL } from '../../utils/constant';
 
 const Register = () => {
   const [formData, setFormData] = useState({

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Quiz from './CreateQuiz';
+import Quiz from '../quiz/CreateQuiz';
 
 const Session = () => {
   const username = localStorage.getItem('username');

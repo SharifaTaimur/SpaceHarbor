@@ -2,10 +2,10 @@ import { useState, useEffect, useContext } from 'react';
 import { FaSignInAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Spinner from '../component/Spinner';
-import { SiteContext } from '../context/siteContext';
+import Spinner from '../Spinner';
+import { SiteContext } from '../../context/siteContext';
 import axios from 'axios';
-import { BASE_URL } from '../utils/constant';
+import { BASE_URL } from '../../utils/constant';
 
 const Login = () => {
   const [formData, setFormData] = useState({

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import Timer from '../component/Timer';
+import Timer from '../Timer';
 import axios from 'axios';
-import { BASE_URL } from '../utils/constant';
+import { BASE_URL } from '../../utils/constant';
 import Confetti from 'react-confetti';
-import gms from '../images/_.svg';
+import gms from '../../images/_.svg';
 
 const StartGame = () => {
   const defaultTimer = 60;

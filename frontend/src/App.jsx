@@ -1,14 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './Pages/Home';
-import Login from './Pages/Login';
-import Register from './Pages/Register';
-import Session from './Pages/Session';
-import QuestionPage from './Pages/QuestionPage';
-import StartGame from './Pages/StartGame';
-import WaitingPage from './Pages/WaitingPage';
-// import Header from './component/Header';
-// import Footer from './component/Footer';
-import Quiz from './Pages/CreateQuiz';
+import Home from './component/home/Home';
+import Login from './component/join/Login';
+import Register from './component/register/Register';
+import Session from './component/session/Session';
+import QuestionPage from './component/inprogress/QuestionPage';
+import StartGame from './component/game/StartGame';
+import WaitingPage from './component/WaitingPage';
+import Quiz from './component/quiz/CreateQuiz';
 import { useEffect, useState } from 'react';
 import { SiteContext } from './context/siteContext';
 import { ToastContainer } from 'react-toastify';
@@ -38,7 +36,6 @@ function App() {
       <SiteContext.Provider value={{ siteData, setSiteData }}>
         <Router>
           <div className="container">
-            {/* <Header /> */}
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
@@ -49,7 +46,6 @@ function App() {
               <Route path="/inprogress" element={<QuestionPage />} />
               <Route path="/game" element={<StartGame />} />
             </Routes>
-            {/* <Footer /> */}
           </div>
         </Router>
         <ToastContainer />

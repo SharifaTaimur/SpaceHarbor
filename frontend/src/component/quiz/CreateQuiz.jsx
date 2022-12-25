@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import './CreateQuiz.css';
-import Dialog from './Dialog';
-import { BASE_URL } from '../utils/constant';
+import Dialog from '../Dialog';
+import { BASE_URL } from '../../utils/constant';
 // import { v4 as uuidv4 } from 'uuid';
 
 const Quiz = () => {

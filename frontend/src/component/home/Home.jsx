@@ -1,10 +1,9 @@
 import React from 'react';
-import img from '../images/BigTitle.svg';
-import qmark from '../images/gmark1.svg';
-import star from '../images/starss.svg';
+import qmark from '../../images/gmark1.svg';
+import star from '../../images/starss.svg';
 import styles from './Home.module.css';
 import { Link } from 'react-router-dom';
-import charecter from '../images/Kwizzard-character.png';
+import img from '../../images/BigTitle.svg';
 
 export default function Home() {
   return (

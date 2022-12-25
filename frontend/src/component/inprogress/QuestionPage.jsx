@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import WaitingPage from './WaitingPage';
+import WaitingPage from '../WaitingPage';
 import styles from './QuestionPage.module.css';
 // import charecter from '../images/Kwizzard-character.png';
 //Mariyya sepret the files palyer and the admin
@@ -71,8 +71,8 @@ export default function QuestionPage() {
         onStart={() => {
           setIsWaiting(false);
           setQuestion({
-            // title: 'What is your name?',
-            // options: ['Mariya', 'Iman', 'Mohammed', 'Sharifa'],
+            title: 'What is your name?',
+            options: ['Mariya', 'Iman', 'Mohammed', 'Sharifa'],
           });
 
           const response = {

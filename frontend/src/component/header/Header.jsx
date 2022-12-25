@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
 import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa';
-import { SiteContext } from '../context/siteContext';
+import { SiteContext } from '../../context/siteContext';
 import { useContext } from 'react';
 
 export default function Header() {
