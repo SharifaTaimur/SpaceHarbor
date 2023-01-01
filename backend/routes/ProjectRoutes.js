@@ -24,9 +24,9 @@ router.route('/add').post((req, res) => {
     password,
     players: [
       {
-        UserName: '',
-        Score: '',
-        Streak: '',
+        userName: '',
+        score: '',
+        streak: '',
       },
     ],
     q_and_a: [
@@ -45,7 +45,6 @@ router.route('/add').post((req, res) => {
 
 // get read & update data
 router.route('/save').post((req, res) => {
-  console.log('status update', req.body.status);
   user
     .findOne()
     .sort({ _id: -1 })
@@ -88,7 +87,6 @@ router.route('/getQuestions').get((req, res) => {
 
 // add players and update score
 router.route('/players').post((req, res) => {
-  console.log(req.body.username);
   user
     .findOne()
     .sort({ _id: -1 })
@@ -100,7 +98,7 @@ router.route('/players').post((req, res) => {
           $push: {
             players: {
               userName: req.body.username,
-              score: '6',
+              score: '',
               streak: req.body.sessionId,
             },
           },
@@ -118,7 +116,6 @@ router.route('/players').post((req, res) => {
 
 // update game status
 router.route('/updatestatus').post((req, res) => {
-  console.log('status update', req.body.status);
   user
     .findOne()
     .sort({ _id: -1 })
@@ -144,7 +141,6 @@ router.route('/updatestatus').post((req, res) => {
 
 // delete question
 router.route('/deletequestion').post((req, res) => {
-  console.log('delete', req.body);
   // user
   //   .findOne()
   //   .sort({ _id: -1 })
@@ -166,6 +162,33 @@ router.route('/deletequestion').post((req, res) => {
   //       },
   //     );
   //   });
+});
+
+router.route('/playersScore').post((req, res) => {
+  console.log('scores', req.body);
+  user
+    .findOne({
+      players: { $elemMatch: { userName: req.body.currentPlayer } },
+    })
+    .sort({ _id: -1 })
+    .limit(1)
+    .then(val => {
+      user.updateOne(
+        // { _id: val._id },
+        {
+          $push: {
+            score: req.body.total,
+          },
+        },
+        err => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log('Success update');
+          }
+        },
+      );
+    });
 });
 
 module.exports = router;

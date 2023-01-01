@@ -14,8 +14,6 @@ const Quiz = () => {
   });
   const [questions, setQuestions] = useState([]);
   const [questionList, setQuestionList] = useState([]);
-  // const test = uuidv4();
-  // console.log('unique', test);
 
   const addAnswer = () => {
     if (questionList.length < 4) {
@@ -93,22 +91,16 @@ const Quiz = () => {
     getQuestion();
   }, []);
 
-  console.log(
-    'testList',
-    testList?.q_and_a?.map((val, indx) => {
-      Object.keys(val).forEach(key => {
-        console.log('right', key === '_id' && val[key]);
-      });
-    }),
-  );
-
-  // test -- end
   // console.log(
-  //   'questions',
-  //   questions?.map((val, indx) => {
-  //     console.log('info', val, indx);
+  //   'testList',
+  //   testList?.q_and_a?.map((val, indx) => {
+  //     Object.keys(val).forEach(key => {
+  //       console.log('right', key === '_id' && val[key]);
+  //     });
   //   }),
   // );
+
+  // test -- end
 
   return (
     <>

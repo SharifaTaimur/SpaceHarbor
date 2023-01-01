@@ -31,6 +31,9 @@ const Login = () => {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+
+    e.target.id === 'username' &&
+      localStorage.setItem('name', JSON.stringify(e.target.value));
   };
 
   const onSubmit = e => {
@@ -41,15 +44,11 @@ const Login = () => {
       sessionId,
     };
 
-    console.log('players', userData);
-
     axios
       .post(BASE_URL + '/players', userData)
       .then(res => {
-        if (res.data) {
-          setSiteData({ ...siteData, user: res.data });
-          localStorage.setItem('user_infov1', JSON.stringify(res.data));
-        }
+        console.log('res', res);
+        // localStorage.setItem('name', JSON.stringify(userData.name));
       })
       .catch(e => {
         setSiteData({ ...siteData, isError: true, message: e.message });

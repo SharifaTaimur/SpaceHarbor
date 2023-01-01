@@ -12,87 +12,67 @@ const StartGame = () => {
   const [score, setScore] = useState(0);
   const [selected, setSelected] = useState(null);
   const [timer, setTimer] = useState(defaultTimer);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
+  const [values, setValues] = useState({
+    total: score,
+    currentPlayer: localStorage.getItem('name'),
+  });
+
+  useEffect(() => {
+    axios
+      .get(BASE_URL + '/getQuestions')
+      .then(res => {
+        setData(res.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setTimer(x => (x > 0 ? x - 1 : 0));
-    }, 1000);
+    }, 100);
 
     return () => {
       clearInterval(interval);
     };
   }, [timer]);
 
-  const getQuestion = async () => {
-    const response = await axios.get(BASE_URL + '/getQuestions');
-    setData(response.data);
+  const optionClicked = async (option, index) => {
+    data.q_and_a.map((val, indx) => {
+      Object.keys(val).forEach(key => {
+        if (indx === currentQuestion && key == 'answer') {
+          // val[key] === option && setScore(score + 1);
+
+          setValues(prevState => ({
+            ...prevState,
+            total: val[key] === option && prevState.total + 1,
+          }));
+          console.log('values', val[key] === option && values.total + 1);
+          setSelected(index);
+        }
+      });
+    });
   };
 
-  useEffect(() => {
-    getQuestion();
-  }, []);
+  const handleTimerEnd = useCallback(async () => {
+    console.log('valuesHandle', values);
 
-  // test -- start Timer
-  // const [counter, setCounter] = useState(59);
-
-  // useEffect(() => {
-  //   if (counter > 0) {
-  //     setTimeout(() => setCounter(counter - 1), 1000);
-  //   }
-  // }, [counter]);
-
-  // test -- end Timer
-
-  const handleTimerEnd = useCallback(() => {
-    console.log('inside function');
-    if (currentQuestion < data?.q_and_a?.length) {
-      console.log('are you in?');
+    const response = await axios.get(BASE_URL + '/getQuestions');
+    if (currentQuestion + 1 < response.data?.q_and_a?.length) {
       setCurrentQuestion(currentQuestion + 1);
       setSelected(null);
     } else {
       setShowResults(true);
     }
-  }, [currentQuestion]);
 
-  // original send
-
-  /* A possible answer was clicked */
-  // const optionClicked = (isCorrect, index) => {
-  //   console.log('onClick', isCorrect, index);
-
-  //   if (selected !== null) {
-  //     return;
-  //   }
-
-  //   // Increment the score
-  //   if (isCorrect) {
-  //     setScore(score + 1);
-  //   }
-
-  //   setSelected(index);
-  // };
-
-  const optionClicked = async option => {
-    data.q_and_a.map((val, indx) => {
-      Object.keys(val).forEach(key => {
-        if (indx === currentQuestion && key == 'answer') {
-          console.log('right', val[key], option);
-          val[key] === option && setScore(score + 1);
-          setCurrentQuestion(currentQuestion + 1);
-        }
-      });
-    });
-
-    //  here we will pass score for each user
-    // try {
-    //   await axios.post(BASE_URL + '/players', score);
-    // } catch {
-    //   console.log('update error scores');
-    // }
-  };
-
-  console.log('score', score, data?.q_and_a?.length - 1);
+    if (currentQuestion === response.data?.q_and_a?.length - 1) {
+      try {
+        await axios.post(BASE_URL + '/playersScore', values);
+      } catch {
+        console.log('update error scores');
+      }
+    }
+  }, [currentQuestion, values]);
 
   return (
     <>
@@ -102,13 +82,14 @@ const StartGame = () => {
             <h1>Final Results</h1>
             <h2>
               <Confetti width={window.innerWidth} height={window.innerHeight} />
-              {score} out of {data?.q_and_a?.length - 1} correct - (
-              {(score / data?.q_and_a?.length - 1) * 100}%)
+              {values.total} out of {data?.q_and_a?.length - 1} correct
+              {/* - (
+              {(values.total / data?.q_and_a?.length) * 100}%) */}
             </h2>
           </div>
         ) : (
           <>
-            {data.q_and_a?.map((val, indx) => {
+            {data?.q_and_a?.map((val, indx) => {
               if (indx === currentQuestion) {
                 return (
                   <div className="question-card" id={indx}>
@@ -118,7 +99,9 @@ const StartGame = () => {
                       key={currentQuestion}
                     />
 
-                    <h3 className="question-text">{val.question}</h3>
+                    <h3 className="question-text">
+                      {currentQuestion}. {val.question}
+                    </h3>
                     <div className="opt">
                       {val.otherOptions.map((option, index) => {
                         return (
@@ -131,10 +114,7 @@ const StartGame = () => {
                                   : 'answersOptions'
                               }
                               key={option.id}
-                              onClick={e =>
-                                // optionClicked(option.isCorrect, index)
-                                optionClicked(option)
-                              }
+                              onClick={e => optionClicked(option, index)}
                             >
                               {option}
                             </div>
